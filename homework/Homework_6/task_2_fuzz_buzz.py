@@ -9,4 +9,4 @@ for y in range(1, 101):
     elif y % 5 == 0:
         print("Buzz")
     else:
-        print(x)
+        print(y)
