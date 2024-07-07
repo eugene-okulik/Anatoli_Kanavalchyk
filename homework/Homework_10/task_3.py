@@ -30,13 +30,8 @@ calc = operation_selector(calc)
 
 
 def create_price_dict(price_list):
-    prices_dict = {}
-    for line in price_list.split('\n'):
-        if line.strip():
-            item, price_str = line.rsplit(' ', 1)
-            price = int(price_str[:-1])
-            prices_dict[item] = price
-    return prices_dict
+    return {item: int(price_str[:-1]) for line in price_list.split('\n') if line.strip() for item, price_str in
+            [line.rsplit(' ', 1)]}
 
 
 PRICE_LIST = '''тетрадь 50р
