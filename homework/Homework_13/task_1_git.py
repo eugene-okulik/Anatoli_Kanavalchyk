@@ -2,7 +2,7 @@ import os
 from datetime import datetime, timedelta
 
 base_path = os.path.dirname(__file__)
-file_path = os.path.join(base_path,'homework', 'eugene_okulik', 'hw_13', 'data.txt')
+file_path = os.path.join(base_path, 'homework', 'eugene_okulik', 'hw_13', 'data.txt')
 print(file_path)
 
 
