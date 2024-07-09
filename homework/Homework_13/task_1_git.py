@@ -1,20 +1,9 @@
-import git
 import os
 from datetime import datetime, timedelta
 
-# Путь к файлу в github
-repo_url = 'https://github.com/eugene-okulik/Anatoli_Kanavalchyk'
-file_path_in_repo = 'homework/eugene_okulik/hw_13/data.txt'
-clone_dir = '/tmp/repo_clone'
-
-# Клонирование репозитория
-if os.path.exists(clone_dir):
-    repo = git.Repo(clone_dir)
-    repo.remotes.origin.pull()
-else:
-    repo = git.Repo.clone_from(repo_url, clone_dir)
-
-full_file_path = os.path.join(clone_dir, file_path_in_repo)
+base_path = os.path.dirname(__file__)
+file_path = os.path.join(base_path,'homework', 'eugene_okulik', 'hw_13', 'data.txt')
+print(file_path)
 
 
 def process_dates(file_path):
@@ -39,4 +28,4 @@ def process_dates(file_path):
                 print(days_ago)
 
 
-process_dates(full_file_path)
+process_dates(file_path)
