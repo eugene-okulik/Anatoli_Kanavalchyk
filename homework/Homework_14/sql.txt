@@ -1,0 +1,75 @@
+INSERT INTO students (name, second_name) VALUES ('Bobby', 'Rio')
+
+SELECT id, name, second_name, group_id
+FROM students
+WHERE name = 'Bobby' AND second_name = 'Rio'
+
+INSERT INTO books (title) VALUES ('Snake'), ('Doom')
+
+SELECT id, title, taken_by_student_id
+FROM books
+WHERE title IN ('Snake', 'Doom');
+
+
+UPDATE books
+SET taken_by_student_id = 1415
+WHERE title IN ('Snake', 'Doom')
+
+INSERT INTO `groups` (title, start_date, end_date)
+VALUES ('Group for Bobby', '2024-07-01', '2024-01-01')
+
+SELECT *
+FROM `groups`
+WHERE title = 'Group for Bobby'
+
+UPDATE students 
+SET group_id = 1404
+WHERE students.id = 1415
+
+INSERT INTO `subjets` (title) VALUES ('Snake Science'), ('Doom Science')
+
+SELECT *
+FROM subjets
+WHERE title IN ('Snake Science', 'Doom Science')
+
+
+INSERT INTO `lessons` (title, subject_id) VALUES ('INTRO to Snake Science', 1875), ('Advanced Snake Science', 1875)
+
+SELECT *
+FROM `lessons`
+WHERE title IN ('INTRO to Snake Science', 'Advanced Snake Science')
+
+
+INSERT INTO `lessons` (title, subject_id) VALUES ('INTRO to DOOM Science', 1876), ('Advanced DOOM Science', 1876)
+
+SELECT id, title, subject_id
+FROM `lessons`
+WHERE title IN ('INTRO to DOOM Science', 'Advanced DOOM Science')
+
+INSERT INTO `marks` (value, lesson_id, student_id) VALUES (10, 4248, 1415), (10, 4249, 1415),(10, 4250, 1415), (10, 4251, 1415)
+
+
+SELECT id, value, lesson_id, student_id
+FROM `marks`
+WHERE student_id = 1415
+
+
+
+SELECT value  as Bobby_marks
+FROM marks 
+WHERE student_id = 1415
+
+
+SELECT title  as Bobby_books
+FROM books 
+WHERE taken_by_student_id = 1415
+
+
+SELECT *
+FROM students s
+JOIN `groups` g ON s.group_id = g.id
+JOIN books b ON s.id = b.taken_by_student_id
+JOIN marks m ON s.id = m.student_id
+JOIN lessons l ON m.lesson_id = l.id
+JOIN subjets ON l.subject_id = subject_id
+WHERE s.id = 1415
