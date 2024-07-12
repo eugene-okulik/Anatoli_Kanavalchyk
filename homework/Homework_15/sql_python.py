@@ -80,8 +80,8 @@ print(f"Добавлены оценки для уроков {lesson_ids} для 
 
 # 9. Получаем и печатаем все данные, связанные со студентом
 cursor.execute("""
-        SELECT s.id as student_id, s.name, s.second_name, g.id as group_id, g.title as group_title, 
-               b.id as book_id, b.title as book_title, m.id as mark_id, m.value as mark_value, 
+        SELECT s.id as student_id, s.name, s.second_name, g.id as group_id, g.title as group_title,
+               b.id as book_id, b.title as book_title, m.id as mark_id, m.value as mark_value,
                l.id as lesson_id, l.title as lesson_title, sub.id as subject_id, sub.title as subject_title
         FROM students s
         JOIN `groups` g ON s.group_id = g.id
