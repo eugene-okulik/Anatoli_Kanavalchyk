@@ -32,7 +32,7 @@ file_path = os.path.join(base_path, 'homework', 'eugene_okulik', 'Lesson_16', 'h
 data_from_csv = []
 with open(file_path, mode='r', newline='', encoding='utf-8') as file:
     reader = csv.reader(file)
-    headers = next(reader)  
+    headers = next(reader)
     for row in reader:
         data_from_csv.append(row)
 
