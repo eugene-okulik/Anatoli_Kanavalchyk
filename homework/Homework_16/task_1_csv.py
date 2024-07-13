@@ -36,10 +36,27 @@ with open(file_path, mode='r', newline='', encoding='utf-8') as file:
     for row in reader:
         data_from_csv.append(row)
 
-missing_data = []
 conn = connect_to_db()
+missing_data = []
 
-# Вывод отсутствующих данных
+if conn:
+    cursor = conn.cursor()
+
+    for row in data_from_csv:
+        unique_id = row[0]
+
+        query = f"SELECT * FROM students WHERE id = %s"
+        cursor.execute(query, (unique_id,))
+        result = cursor.fetchone()
+
+        if not result:
+            missing_data.append(('students', row))
+
+    cursor.close()
+    conn.close()
+else:
+    print("Не удалось подключиться к базе данных.")
+
 if missing_data:
     print("Данные, которых не хватает в базе данных:")
     for table_name, row in missing_data:
