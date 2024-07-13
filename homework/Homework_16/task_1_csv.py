@@ -20,8 +20,8 @@ def connect_to_db():
             database=os.getenv('DB_NAME')
         )
         return db
-    except mysql.connector.Error as err:
-        print(f"Ошибка подключения к базе данных: {err}")
+    except mysql.connector.Error as erro:
+        print(f"Ошибка подключения к базе данных: {erro}")
         return None
 
 
@@ -42,18 +42,36 @@ missing_data = []
 if conn:
     cursor = conn.cursor()
 
-    tables_to_check = ['students', 'books', '`groups`', 'lessons', 'marks', 'subjets']
+    for row in data_from_csv:
+        student_name, student_second_name, group_title, book_title, subject_title, lesson_title, mark_value = row
 
-    for table_name in tables_to_check:
-        for row in data_from_csv:
-            unique_id = row[0]
+        query = """
+        SELECT *
+        FROM students s
+        JOIN `groups` g ON s.group_id = g.id
+        JOIN books b ON s.id = b.taken_by_student_id
+        JOIN marks m ON s.id = m.student_id
+        JOIN lessons l ON m.lesson_id = l.id
+        JOIN subjets sub ON l.subject_id = sub.id
+        WHERE s.name = %s
+          AND s.second_name = %s
+          AND g.title = %s
+          AND b.title = %s
+          AND sub.title = %s
+          AND l.title = %s
+          AND m.value = %s
+        """
 
-            query = f"SELECT * FROM {table_name} WHERE id = %s"
-            cursor.execute(query, (unique_id,))
+        try:
+            cursor.execute(query, (student_name, student_second_name, group_title, book_title,
+                                   subject_title, lesson_title, mark_value))
             result = cursor.fetchone()
+        except mysql.connector.Error as err:
+            print(f"Ошибка выполнения запроса: {err}")
+            continue
 
-            if not result:
-                missing_data.append((table_name, row))
+        if not result:
+            missing_data.append(row)
 
     cursor.close()
     conn.close()
@@ -62,7 +80,7 @@ else:
 
 if missing_data:
     print("Данные, которых не хватает в базе данных:")
-    for table_name, row in missing_data:
-        print(f"Таблица: {table_name}, Данные: {row}")
+    for row in missing_data:
+        print(f"Данные: {row}")
 else:
     print("Все данные из CSV файла присутствуют в базе данных.")
