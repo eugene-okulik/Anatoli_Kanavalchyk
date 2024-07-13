@@ -45,7 +45,7 @@ if conn:
     for row in data_from_csv:
         unique_id = row[0]
 
-        query = f"SELECT * FROM students WHERE id = %s"
+        query = "SELECT * FROM students WHERE id = %s"
         cursor.execute(query, (unique_id,))
         result = cursor.fetchone()
 
