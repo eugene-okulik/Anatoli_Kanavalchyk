@@ -42,15 +42,18 @@ missing_data = []
 if conn:
     cursor = conn.cursor()
 
-    for row in data_from_csv:
-        unique_id = row[0]
+    tables_to_check = ['students', 'books', '`groups`', 'lessons', 'marks', 'subjets']
 
-        query = "SELECT * FROM students WHERE id = %s"
-        cursor.execute(query, (unique_id,))
-        result = cursor.fetchone()
+    for table_name in tables_to_check:
+        for row in data_from_csv:
+            unique_id = row[0]
 
-        if not result:
-            missing_data.append(('students', row))
+            query = f"SELECT * FROM {table_name} WHERE id = %s"
+            cursor.execute(query, (unique_id,))
+            result = cursor.fetchone()
+
+            if not result:
+                missing_data.append((table_name, row))
 
     cursor.close()
     conn.close()
