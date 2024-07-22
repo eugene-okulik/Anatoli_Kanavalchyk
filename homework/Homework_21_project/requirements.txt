@@ -1,0 +1,4 @@
+requests~=2.32.3
+allure-pytest
+pytest==8.3.1
+locust~=2.29.1
