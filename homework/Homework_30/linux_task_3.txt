@@ -1,0 +1,14 @@
+stat /dev/null - character special file
+stat /dev/zero - character special file
+stat /dev/vda - block special file
+stat /dev/tty - character special file
+stat /root - directory
+stat /etc/passwd - regular file
+stat /proc/mounts - symbolic link
+stat /bin/ls - regular file
+stat /bin/zcat - regular file
+
+
+Note: вместо stat /dev/sda использовад stat /dev/sda так как stat /dev/sda выдал stat: cannot stat '/dev/ыda': No such file or directory.
+
+Использовал lsblk, чтобы вывести список всех блочных устройств.

@@ -1,0 +1,18 @@
+	1.	Go to first line in file:
+	•	Нажимаем g.
+	2.	Go to last line in file:
+	•	Нажимаем G.
+	3.	Forward one window:
+	•	Нажимаем Ctrl + F или space.
+	4.	Forward one line:
+	•	Нажимаем j или клавишу вниз.
+	5.	Backward one line:
+	•	Нажимаем k или клавишу вверх.
+	6.	Search forward for matching line:
+	•	Нажимаем /, затем вводим поисковое слово  и нажимаем Enter.
+	7.	Search backward for matching line:
+	•	Нажимаем ?, затем вводим поисковое слово  и нажимаем Enter.
+	8.	Repeat previous search:
+	•	Нажимаем n.
+	9.	Repeat previous search in reverse direction:
+	•	Нажимаем N.
